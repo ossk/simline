@@ -1,0 +1,20 @@
+# Compiled binary
+src/simline
+
+# Object files
+src/*.o
+
+# Generated include file (symlink created by make)
+src/fsizes.inc
+
+# Common editor and OS artefacts
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Output files produced by the code
+*.fits
+*.lev
+*.n

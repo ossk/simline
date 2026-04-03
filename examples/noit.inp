@@ -1,0 +1,22 @@
+ Cut-off for Gaussians in the line emission [sigma]:  
+  3.2000    
+ Cut-off for Gaussians in freq. integration [sigma]:  
+  4.2000    
+ Resolution in scanning the Gaussians [sigma]:  
+ 0.55000    
+ Maximum change factor for the level densities between grid points:  
+  1.300    
+ Hysteresis in the radial grid adjustment [0..1]:  
+ 0.20000    
+ Maximum change of the radial velocity between grid points [sigma]:  
+  2.5000    
+ Maximum relative distance of points on the spatial integration scale:  
+ 0.2000    
+ Maximum velocity shift between radiative transfer points [sigma]:  
+ 0.55000    
+ Initial populations [1=thermal,2=no radiation,3=Sobolev,4=file input]:  
+  -3
+ Neglection threshold for the level populations:  
+ 1.00000E-08
+ Relative accuracy as convergence criterion:  
+ 2.00000E-06

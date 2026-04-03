@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use SimLine in published research, please cite it as below."
+title: SimLine
+abstract: >
+  SimLine is a FORTRAN code for computing molecular transition line profiles
+  in spherically symmetric clouds with arbitrary density, temperature and
+  velocity structure. Turbulence and clumping are treated in a local
+  statistical approximation with a radial dependence of the correlation
+  parameters. The code solves the radiative transfer and level population
+  equations self-consistently using an accelerated lambda iteration and
+  computes emergent line profiles convolved with a Gaussian telescope beam.
+version: "2.18"
+license: GPL-3.0-or-later
+authors:
+  - family-names: Ossenkopf-Okada
+    given-names: Volker
+    affiliation: "I. Physikalisches Institut, Universität zu Köln"
+    email: ossk@ph1.uni-koeln.de
+preferred-citation:
+  type: article
+  title: "Massive core parameters from spatially unresolved multi-line observations"
+  authors:
+    - family-names: Ossenkopf
+      given-names: Volker
+    - family-names: Trojan
+      given-names: Christoph
+    - family-names: Stutzki
+      given-names: Jürgen
+  journal: "Astronomy & Astrophysics"
+  volume: 378
+  start: 608
+  year: 2001
+repository-code: "https://github.com/[owner]/simline"
+keywords:
+  - radiative transfer
+  - molecular lines
+  - astrophysics
+  - interstellar medium
+  - FORTRAN
