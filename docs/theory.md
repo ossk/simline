@@ -4,14 +4,14 @@
 
 The general formulation of the frequency-dependent radiative transfer equation
 
-$$\frac{dI(\nu,\vec{r},\vec{n})}{ds} = -\kappa(\nu,\vec{r},\vec{n})\, I(\nu,\vec{r},\vec{n}) + \epsilon(\nu,\vec{r},\vec{n})$$
+$$\frac{dI(\nu,\vec{r},\vec{n})}{ds} = -\kappa(\nu,\vec{r},\vec{n}) I(\nu,\vec{r},\vec{n}) + \epsilon(\nu,\vec{r},\vec{n})$$
 
 may be reduced in the spherically symmetric case to three independent
 coordinates. It is sufficient to consider radiation in the direction of the
 $z$ axis and to neglect the $\phi$ dependence of the radius vector. Then the
 radiative transfer equation can be written as
 
-$$\frac{dI_z(\nu,p,z)}{dz} = -\kappa(\nu,p,z)\, I_z(\nu,p,z) + \epsilon(\nu,p,z)$$
+$$\frac{dI_z(\nu,p,z)}{dz} = -\kappa(\nu,p,z) I_z(\nu,p,z) + \epsilon(\nu,p,z)$$
 
 where $p$ denotes the displacement variable ($p=\sqrt{x^2+y^2}$). The $z$ axis
 is chosen in the direction towards the observer. Since the spatial grid is
@@ -24,16 +24,16 @@ to use stepwise the solution of the integral equation, allowing reduction of the
 error to third order:
 
 $$I_z(\nu,p,z_i) = \exp \left( -\int_{z_{i-1}}^{z_i}
-\kappa(\nu,p,z)\, dz \right) \left[ I_z(\nu,p,z_{i-1}) +
+\kappa(\nu,p,z) dz \right) \left[ I_z(\nu,p,z_{i-1}) +
 \int_{z_{i-1}}^{z_i} \epsilon(\nu,p,z) \exp \left( \int_{z_{i-1}}^z
-\kappa(\nu,p,z')\, dz' \right) dz \right]$$
+\kappa(\nu,p,z') dz' \right) dz \right]$$
 
 The incident radiation at the outer boundary of the cloud is assumed to follow
 a black-body spectrum with temperature $T_{\rm bg}$:
 
-$$I_{\rm bg}(\nu) = \frac{2 h \nu^3}{c^2}\left[\exp\!\left(\frac{h\nu}{k\, T_{\rm bg}}\right) - 1\right]^{-1}$$
+$$I_{\rm bg}(\nu) = \frac{2 h \nu^3}{c^2}\left[\exp\left(\frac{h\nu}{k T_{\rm bg}}\right) - 1\right]^{-1}$$
 
-For the cosmic background radiation, $T_{\rm bg} = 2.73\,\mathrm{K}$.
+For the cosmic background radiation, $T_{\rm bg} = 2.73 \mathrm{K}$.
 
 The program assumes complete redistribution of energy between the molecules at
 a given level, so that one can define a unique set of level populations $n_j$
@@ -42,7 +42,7 @@ of a molecule. This also means that the line profiles for emission and
 absorption are the same. In molecular clouds it is sufficient to consider pure
 Doppler broadening so that the profiles are given by
 
-$$\Phi(\nu) = \frac{1}{\sqrt{\pi}\,\sigma} \exp\!\left(-\frac{(\nu - \nu_0(1+v_z/c))^2}{\sigma^2}\right)$$
+$$\Phi(\nu) = \frac{1}{\sqrt{\pi}\sigma} \exp\left(-\frac{(\nu - \nu_0(1+v_z/c))^2}{\sigma^2}\right)$$
 
 where $v_z$ is the systematic velocity in the $z$ direction, $\sigma$ is the
 local line width, and $\nu$ is the frequency in the observer's frame. (Without
@@ -53,8 +53,8 @@ With the assumption of complete redistribution, the absorption and emission
 coefficients for a given transition are determined by
 
 $$\begin{aligned}
-\kappa_{j,l}(\nu) &= \frac{h\nu_0}{c}\,(n_l B_{l,j} - n_j B_{j,l})\,\Phi(\nu) \\
-\epsilon_{j,l}(\nu) &= \frac{h\nu_0}{4\pi}\,n_j A_{j,l}\,\Phi(\nu)
+\kappa_{j,l}(\nu) &= \frac{h\nu_0}{c}(n_l B_{l,j} - n_j B_{j,l})\Phi(\nu) \\
+\epsilon_{j,l}(\nu) &= \frac{h\nu_0}{4\pi} n_j A_{j,l}\Phi(\nu)
 \end{aligned}$$
 
 where stimulated emission is treated as negative absorption.
@@ -62,20 +62,20 @@ where stimulated emission is treated as negative absorption.
 The level populations at a given radius $r$ may be computed from the linear
 system of balance equations
 
-$$n_j \sum_{l\ne j}\!\left( A_{j,l}+B_{j,l}u_{j,l}+c_{j,l}\right) =
+$$n_j \sum_{l\ne j}\left( A_{j,l}+B_{j,l}u_{j,l}+c_{j,l}\right) =
 \sum_{l \ne j} n_l \left(A_{l,j}+B_{l,j}u_{j,l}+c_{l,j}\right)$$
 
 where the radiative energy density $u_{j,l}$ for the transition between levels
 $j$ and $l$ at a given point is computed from the integral
 
-$$u_{j,l}(p,z) = \frac{1}{c} \int_0^{2\pi}\!d\phi \int_0^\pi d\theta\;\sin\theta
-\int_{-\infty}^{\infty} d\nu\;\Phi_{\phi,\theta}(\nu,\vec{v})\,
+$$u_{j,l}(p,z) = \frac{1}{c} \int_0^{2\pi}d\phi \int_0^\pi d\theta\;\sin\theta
+\int_{-\infty}^{\infty} d\nu\;\Phi_{\phi,\theta}(\nu,\vec{v})
 I(\nu,p,z,\phi,\theta)$$
 
 Exploiting spherical symmetry, this may be transformed into
 
 $$u_{j,l}(r) = \frac{2\pi}{rc} \int_{-r}^r dz' \int_{-\infty}^\infty
-\Phi(\nu)\,I_z\!\left(\nu,\,p'=\sqrt{r^2-z'^2},\,z'\right) d\nu$$
+\Phi(\nu) I_z\left(\nu,p'=\sqrt{r^2-z'^2},z'\right) d\nu$$
 
 where the radius $r$ is given as $r=\sqrt{p^2+z^2}$. Due to the symmetry, only
 radiation parallel to the $z$ axis is encountered. For the central line
@@ -118,24 +118,24 @@ $$n(r) = n_0 \times \exp(-r^2/r_{\rm cl}^2)$$
 we get an effective absorption coefficient for the whole medium given by
 
 $$\kappa_{\rm eff} = n_{\rm cl} \times \pi r_{\rm cl}^2
-\int_0^{\tau_{\rm cl}} \frac{1-\exp(-\tau)}{\tau}\,d\tau$$
+\int_0^{\tau_{\rm cl}} \frac{1-\exp(-\tau)}{\tau} d\tau$$
 
 (Martin et al. 1984), where $n_{\rm cl}$ is the number density of clumps
 contributing at the considered frequency and
-$\tau_{\rm cl}=\sqrt{\pi}\,\kappa r_{\rm cl}$ is their central opacity.
+$\tau_{\rm cl}=\sqrt{\pi} \kappa r_{\rm cl}$ is their central opacity.
 
 Assuming a Maxwellian turbulent velocity distribution of clumps and a thermal
 velocity dispersion $\sigma_{\rm th}$ giving at most 1/3 of the total velocity
 dispersion $\sigma$, we obtain an effective absorption coefficient
 
-$$\kappa_{\rm eff}(\nu) = n_{\rm ges}\,\pi r_{\rm cl}^2 \times A(\tau_{\rm cl})
+$$\kappa_{\rm eff}(\nu) = n_{\rm ges} \pi r_{\rm cl}^2 \times A(\tau_{\rm cl})
 \times \frac{\sigma_{\rm th}}{\sigma}
-\exp\!\left(-\frac{(\nu-\nu_0)^2}{\sigma^2}\right)$$
+\exp\left(-\frac{(\nu-\nu_0)^2}{\sigma^2}\right)$$
 
 with
 
 $$A(\tau) = \frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty}dv
-\int_0^{\tau\exp(-v^2)} \frac{1-\exp(-\tau')}{\tau'}\,d\tau'$$
+\int_0^{\tau\exp(-v^2)} \frac{1-\exp(-\tau')}{\tau'} d\tau'$$
 
 Here, $n_{\rm ges}$ is the total number of clumps. In case of pure turbulence
 in velocity space, $n_{\rm ges}$ is given by the volume of the single clumps
@@ -182,7 +182,7 @@ $$\Lambda = \left(\frac{2k T_{\rm e}}{\delta m_{\rm e}}\right)^{3/2}
 \frac{4\pi\epsilon_0 m}{\pi\delta e^2 \nu} \approx
 4.9573 \times 10^7 \left(\frac{T}{\mathrm{K}}\right)^{3/2} \frac{\mathrm{Hz}}{\nu}$$
 
-for $T_{\rm e} < 3.2 \times 10^5\,\mathrm{K}$. The quantities $e$ and
+for $T_{\rm e} < 3.2 \times 10^5 \mathrm{K}$. The quantities $e$ and
 $m_{\rm e}$ denote the electron charge and mass, and $c$ is the speed of light.
 
 For a thermal plasma, the emission coefficient follows from the Planck function:
@@ -204,7 +204,7 @@ from local quantities only.
 The radiative energy density at radius $r$ is determined by the local source
 function $S_{j,l}(r)=\epsilon_{j,l}(r)/\kappa_{j,l}(r)$:
 
-$$u_{j,l}(r) = \left(1-\beta_{j,l}(r)\right)S_{j,l}(r) + \beta_{j,l}(r)\,I_{\rm bg}(\nu_0)$$
+$$u_{j,l}(r) = \left(1-\beta_{j,l}(r)\right)S_{j,l}(r) + \beta_{j,l}(r)I_{\rm bg}(\nu_0)$$
 
 where $\beta_{j,l}(r)$ denotes the photon escape probability for line $j$
 emitted at $r$. It can be computed from an integral over all spatial directions
@@ -229,7 +229,7 @@ equations can be solved by a Newton-Raphson approach. The corrections to the lev
 populations within each step are computed from the matrix equation
 
 $$\sum_i\left(\sum_k \frac{\partial A_{jk}}{\partial n_i}n_k + A_{ji}\right)
-\Delta n_i = \sum_i A_{ji}\, n_i$$
+\Delta n_i = \sum_i A_{ji} n_i$$
 
 where the $A_{ij}$ are the coefficients of the matrix of balance equations.
 
@@ -240,15 +240,15 @@ background is computed from the emergent intensity by integration over the
 projection of the telescope beam on the cloud:
 
 $$T_{\rm beam}(\nu) = \frac{c^2}{2k\nu_0^2}
-\;\frac{\displaystyle\int_0^{2\pi} d\phi\int_0^\infty dp\;p\,
-(I_{\rm surf}(\nu,p)-I_{\rm bg}(\nu))\,f_{\rm beam}(p,\phi)}
-{\displaystyle\int_0^{2\pi} d\phi\int_0^\infty dp\;p\,f_{\rm beam}(p,\phi)}$$
+\;\frac{\displaystyle\int_0^{2\pi} d\phi\int_0^\infty dp\;p
+(I_{\rm surf}(\nu,p)-I_{\rm bg}(\nu)) f_{\rm beam}(p,\phi)}
+{\displaystyle\int_0^{2\pi} d\phi\int_0^\infty dp\;p f_{\rm beam}(p,\phi)}$$
 
 The emergent intensity is the value on the cloud surface
 $I_{\rm surf}(\nu,p)=I_z(\nu,p,\sqrt{R_{\rm cloud}^2-p^2})$. A Gaussian
 profile for the beam is assumed:
 
-$$f_{\rm beam}(p,\phi) = \exp\!\left(\frac{-(p-p_{\rm offset})^2(1+\phi^2)^2}{\sigma_{\rm beam}^2}\right)$$
+$$f_{\rm beam}(p,\phi) = \exp\left(\frac{-(p-p_{\rm offset})^2(1+\phi^2)^2}{\sigma_{\rm beam}^2}\right)$$
 
 The projected beam width is computed from the angular width by
 $\sigma_{\rm beam} = \pi D^2/648000\;\sigma_{\rm beam}['']$ where $D$ is the
