@@ -3,8 +3,31 @@
 This section gives a brief overview of the general structure of the code. It is
 intended as a guide through the source code for deeper inspection of the
 numerical internals or for debugging. The overview explains the function of the
-different routines and how they interact within the program. It cannot substitute
-for a study of the sources, which are commented in relative detail.
+different routines and how they interact within the program. It cannot substitute for a study of the sources, which are commented in relative detail.
+
+## Code design
+
+The general design of the program is directed towards high accuracy of the
+computed line profiles. All errors in the different steps of the program are
+explicitly user-controlled by setting thresholds. All discretizations necessary
+to treat the problem numerically are performed in an adaptive way — there is no
+predefined grid at all, and all grid parameters may change during the iteration
+procedure.
+
+Furthermore, the code was designed for high flexibility, i.e., the ability to
+treat a very broad range of physical parameters with the same accuracy and
+without numerical limitations. For example, the systematic velocities may range
+from 0 to several times the turbulent velocity depending on the compiled
+frequency field size. There is no inherent restriction to a particular range of
+optical depths — the code has been tested for depths at line centre between
+about -5 (moderate masering) and about 5000. However, convergence speed depends
+dramatically on the optical depth, the level structure, and the local velocity
+gradients.
+
+The program is not optimized for speed. Although it runs about 60 times faster
+than its predecessor by E. Krügel, other codes with lower inherent accuracy may
+run another factor of 10 faster. Nevertheless, the code is suitable for
+interactive work even on a modest PC.
 
 ## Main program
 

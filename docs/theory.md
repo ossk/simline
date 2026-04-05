@@ -68,8 +68,8 @@ $$n_j \sum_{l\ne j}\left( A_{j,l}+B_{j,l}u_{j,l}+c_{j,l}\right) =
 where the radiative energy density $u_{j,l}$ for the transition between levels
 $j$ and $l$ at a given point is computed from the integral
 
-$$u_{j,l}(p,z) = \frac{1}{c} \int_0^{2\pi}d\phi \int_0^\pi d\theta\;\sin\theta
-\int_{-\infty}^{\infty} d\nu\;\Phi_{\phi,\theta}(\nu,\vec{v})
+$$u_{j,l}(p,z) = \frac{1}{c} \int_0^{2\pi}d\phi \int_0^\pi d\theta \sin\theta
+\int_{-\infty}^{\infty} d\nu \Phi_{\phi,\theta}(\nu,\vec{v})
 I(\nu,p,z,\phi,\theta)$$
 
 Exploiting spherical symmetry, this may be transformed into
@@ -99,7 +99,7 @@ $$\sigma = \frac{\nu_0}{c}\sqrt{\frac{2kT_{\rm kin}}{m} + \frac{2}{3}\langle v_{
 
 where a Maxwellian distribution of turbulent velocities is assumed. In the data
 input, the turbulent velocities are given as FWHM of the velocity distribution
-($\mathrm{FWHM}(v_{\rm turb})=\sqrt{8/3\times\ln 2\;\langle v_{\rm turb}^2\rangle}$).
+$(\mathrm{FWHM}(v_{\rm turb})=\sqrt{8/3\times\ln 2 \langle v_{\rm turb}^2\rangle})$.
 The thermal velocities are automatically computed from the kinetic gas temperature.
 
 The long-range correlation of the turbulence spectrum described by a Kolmogorov
@@ -172,7 +172,7 @@ the kinetic electron temperature $T_{\rm e}$.
 The absorption coefficient for electron-ion bremsstrahlung in the Rayleigh-Jeans
 approximation is given by:
 
-$$\kappa(\nu) = \frac{8}{3\sqrt{2\pi}}\;\frac{e^6}{(4\pi\epsilon_0 m_{\rm e})^3 c}
+$$\kappa(\nu) = \frac{8}{3\sqrt{2\pi}} \frac{e^6}{(4\pi\epsilon_0 m_{\rm e})^3 c}
 \left(\frac{N_{\rm e}}{\nu}\right)^2 \left(\frac{m_{\rm e}}{k T_{\rm e}}\right)^{3/2}
 \ln\Lambda$$
 
@@ -211,7 +211,7 @@ emitted at $r$. It can be computed from an integral over all spatial directions
 from a given point:
 
 $$\beta_{j,l}(r) = \frac{1}{2}\int_{-1}^1
-\frac{1-\exp(-\kappa_{j,l}(r)/Q(r,\mu))}{\kappa_{j,l}(r)/Q(r,\mu)}\;d\mu$$
+\frac{1-\exp(-\kappa_{j,l}(r)/Q(r,\mu))}{\kappa_{j,l}(r)/Q(r,\mu)} d\mu$$
 
 with the line-integrated effective absorption coefficient $\kappa_{j,l}$ and the
 velocity gradient in spherical symmetry:
@@ -240,9 +240,9 @@ background is computed from the emergent intensity by integration over the
 projection of the telescope beam on the cloud:
 
 $$T_{\rm beam}(\nu) = \frac{c^2}{2k\nu_0^2}
-\;\frac{\displaystyle\int_0^{2\pi} d\phi\int_0^\infty dp\;p
+ \frac{\displaystyle\int_0^{2\pi} d\phi\int_0^\infty dp p
 (I_{\rm surf}(\nu,p)-I_{\rm bg}(\nu)) f_{\rm beam}(p,\phi)}
-{\displaystyle\int_0^{2\pi} d\phi\int_0^\infty dp\;p f_{\rm beam}(p,\phi)}$$
+{\displaystyle\int_0^{2\pi} d\phi\int_0^\infty dp p f_{\rm beam}(p,\phi)}$$
 
 The emergent intensity is the value on the cloud surface
 $I_{\rm surf}(\nu,p)=I_z(\nu,p,\sqrt{R_{\rm cloud}^2-p^2})$. A Gaussian
@@ -251,10 +251,10 @@ profile for the beam is assumed:
 $$f_{\rm beam}(p,\phi) = \exp\left(\frac{-(p-p_{\rm offset})^2(1+\phi^2)^2}{\sigma_{\rm beam}^2}\right)$$
 
 The projected beam width is computed from the angular width by
-$\sigma_{\rm beam} = \pi D^2/648000\;\sigma_{\rm beam}['']$ where $D$ is the
+$\sigma_{\rm beam} = \pi D^2/648000 \sigma_{\rm beam}['']$ where $D$ is the
 distance of the cloud. The standard deviation $\sigma_{\rm beam}$ is coupled to
 the full width at half maximum by
-$\mathrm{FWHM} = 2\sqrt{\ln 2}\;\sigma_{\rm beam}$. The program computes a full
+$\mathrm{FWHM} = 2\sqrt{\ln 2} \sigma_{\rm beam}$. The program computes a full
 map, i.e., the line profiles at a given number of positions on a linear radial
 scan through the cloud.
 
@@ -262,26 +262,3 @@ Within the program, all frequencies are treated in units of $(\nu-\nu_0)/\nu_0$,
 velocities in units of $c$, and intensities in units of $\nu_0^3/c^2$, i.e. by
 a factor $4\pi/h$ larger than the SI unit.
 
-# Code design
-
-The general design of the program is directed towards high accuracy of the
-computed line profiles. All errors in the different steps of the program are
-explicitly user-controlled by setting thresholds. All discretizations necessary
-to treat the problem numerically are performed in an adaptive way — there is no
-predefined grid at all, and all grid parameters may change during the iteration
-procedure.
-
-Furthermore, the code was designed for high flexibility, i.e., the ability to
-treat a very broad range of physical parameters with the same accuracy and
-without numerical limitations. For example, the systematic velocities may range
-from 0 to several times the turbulent velocity depending on the compiled
-frequency field size. There is no inherent restriction to a particular range of
-optical depths — the code has been tested for depths at line centre between
-about -5 (moderate masering) and about 5000. However, convergence speed depends
-dramatically on the optical depth, the level structure, and the local velocity
-gradients.
-
-The program is not optimized for speed. Although it runs about 60 times faster
-than its predecessor by E. Krügel, other codes with lower inherent accuracy may
-run another factor of 10 faster. Nevertheless, the code is suitable for
-interactive work even on a modest PC.

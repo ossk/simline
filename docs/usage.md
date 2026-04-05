@@ -98,10 +98,10 @@ The following entries occur:
 Relative mass of the isotope given in atomic mass units.
 
 **Number of levels:**
-At most 50 levels can be read.
+At most $n_{\mathrm{lev}}$ levels can be read, currently set to 90 for the normal field sizes and 110 for the mclarge model.
 
 **Number of transitions:**
-At most 200 radiative transitions can be read.
+At most $n_{\mathrm{tra}}$ radiative transitions can be read, currently set to 230 for the normal field sizes and 320 for the mclarge model.
 
 **Levels: index, statistical weight, energy [cm⁻¹], name**
 A table with one line per level. Index numbering starts at 1. Each level is
@@ -113,13 +113,13 @@ in the level table.
 
 **Collision rates / Number of temperatures:**
 Two comment lines separate the collision rates from the radiation data. Collision
-rate coefficients can be tabulated for at most 10 different temperatures.
+rate coefficients can be tabulated for at most $n_{\mathrm{tempmax}}$ different temperatures, currently set to 25 for the normal field sizes and 45 for the mclarge model.
 
 **Table of temperature values:**
 One temperature per line.
 
 **Number of collisional transitions:**
-At most 1000 collisional transitions can be read.
+At most $n_{\mathrm{colmax}}$ collisional transitions can be read, currently set to 1200 for the normal field sizes and 3800 for the mclarge model.
 
 **Transitions from – to index, rate coefficients:**
 A table with one line per transition, containing the indices of the two levels
@@ -189,7 +189,7 @@ The cloud may be subdivided into shells with different laws for the physical
 parameters. These input shells have no relation to the radial grid used in the
 radiative transfer computation. Discontinuities at shell edges can be specified
 for power law regions and table input (experienced users only). The maximum
-number of shells is about 180.
+number of shells is $n_{\mathrm{s}}$, currently set to 850 for the normal field sizes and 1050 for the mclarge model.
 
 **Shell type [0=power law / 1=data table]:**
 Within each shell, the radial dependence of the physical parameters can be
@@ -349,17 +349,17 @@ parameters within the same program run.
 
 Due to the static field declarations in FORTRAN 77, the number of grid points
 on each scale is bounded by the compiled field sizes. In the normal version:
-180 radial points, 270 impact parameters, 223 frequency points, 20 molecular
-levels, and 19 radiative transitions. This is suitable for most linear molecules.
+850 radial points, 1300 impact parameters, 600 frequency points, 90 molecular
+levels, and 230 radiative transitions. This is suitable for many molecules.
 The large memory version (`make mclarge`) provides larger field sizes for
-molecules with up to 100 levels.
+molecules with up to 110 levels, like HCO and C$_2$H.
 
 When a required field size exceeds the compilation values, the program either
 returns to the main input loop or stops with exit code 1 (with `-stoponerror`).
 Possible messages are:
 
 **`Number of radial points insufficient to treat the problem with the required accuracy!`**
-The gradient in the level densities requires more than 140 radial points, due to
+The gradient in the level densities requires more than the possible radial points, due to
 a very steep density gradient or strong changes in the level populations (e.g., at
 the edge of very thick clouds). Either increase the "maximum change factor for
 level densities" parameter, or replace steep density gradients with discontinuities
@@ -375,7 +375,7 @@ or for large velocities, increase the "resolution in scanning the Gaussians"
 parameter.
 
 **`Number of frequency points insufficient to treat the problem with the required accuracy!`**
-More than 223 frequency points would be required given the maximum cloud
+More than $n_{\mathrm{f}}$ frequency points would be required given the maximum cloud
 velocities and the required frequency resolution. In the level population
 computation (first stage): increase the Gaussian scanning resolution or reduce
 the frequency integration cut-off. In the emergent profile computation (second
