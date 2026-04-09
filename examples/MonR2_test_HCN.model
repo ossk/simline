@@ -1,0 +1,52 @@
+ Background radiation temperature [K]:  
+  2.7400    
+ Number of shells for the cloud representation:  
+   3
+ Use shells as power law regions or as data table ? [0/1]:  
+   0
+ Radius of the inner core [pc]:  
+  8.00000E-02
+ Core electron density [e/cm^3] and temperature [K]:
+  2.00000E+05   7200.00    
+ 1. shell - Outer radius [pc]: 
+  8.20000E-02
+ 1. shell - H2 density [H2/cm^3] - inner value, exponent
+  2.00000E+05   0.0000    
+ 1. shell - Temperature [K] - inner value, exponent
+   200.00      0.000    
+ 1. shell - Molecule abundance [X/H2] - inner value, exponent
+  1.40000E-07   0.0000    
+ 1. shell - Turbulent velocity [km/s] - inner value, exponent
+   2.5000       0.0000    
+ 1. shell - Correlation length [pc] - inner value, exponent
+   0.0000       0.0000    
+ 1. shell - Radial velocity [km/s] - inner value, exponent
+  0.75000      -1.0000    
+ 2. shell - Outer radius [pc]: 
+  1.00000E-01
+ 2. shell - H2 density [H2/cm^3] - inner value, exponent
+  2.00000E+05  -5.0000    
+ 2. shell - Temperature [K] - inner value, exponent
+   200.00      -5.0000    
+ 2. shell - Molecule abundance [X/H2] - inner value, exponent
+  1.40000E-07   0.0000
+ 2. shell - Turbulent velocity [km/s] - inner value, exponent
+   2.5000       0.0000    
+ 2. shell - Correlation length [pc] - inner value, exponent
+   0.0000       0.0000    
+ 2. shell - Radial velocity [km/s] - inner value, exponent
+  0.73171      -1.0000    
+ 3. shell - Outer radius [pc]: 
+  0.34000    
+ 3. shell - H2 density [H2/cm^3] - inner value, exponent
+  7.4147E+04  -2.0000    
+ 3. shell - Temperature [K] - inner value, exponent
+   74.148      -1.6000    
+ 3. shell - Molecule abundance [X/H2] - inner value, exponent
+  1.400-07     0.0000    
+ 3. shell - Turbulent velocity [km/s] - inner value, exponent
+   2.5000       0.0000    
+ 3. shell - Correlation length [pc] - inner value, exponent
+   0.0000       0.0000    
+ 3. shell - Radial velocity [km/s] - inner value, exponent
+  0.60000      -1.0000    
