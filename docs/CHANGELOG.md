@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.18 → 2.19
+
+- Introduced exception handling for strong masing in initial conditions to stabilize iterations
+- Included new error if solution still hits that condition "Line shows unphysically high maser amplification !"
+
 ## 2.17 → 2.18
 
 - Allowed for longer level names (up to 10 characters) and molecules with up to 100 levels

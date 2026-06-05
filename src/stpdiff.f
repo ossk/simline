@@ -542,6 +542,9 @@ c     ***********************************************************
       real iplus(-nf:nf,ntra), pp(-nf:nf)
       real vs,dv,dny,z
       real negexp,negint,explin,softzone
+      real aij
+      real*8 bij
+      real satcap
       real phi,prof,tau1,tau2,tau,tauq
       real g1,ex1,ex2
       real ihlp1,ihlp2
@@ -677,9 +680,21 @@ c     New parameters
 c     *******************************************************
       j1=jn1
       j2=jn2
-      do 580 l=1,lev
-       ss(l)=sc(l)
-580   continue
+c     *******************************************************
+c     Maser saturation: cap iplus at A/B = (cst2*nu)^3 for
+c     inverted transitions (cp < 0).  This ratio is the maximum
+c     radiation field that does not imply a negative excitation
+c     temperature. It prevents runaway amplification.
+c     *******************************************************
+      do 590 l=1,lev
+        if (cp(l).lt.0.0) then
+          satcap = real(dble(aij(l)) / bij(l))
+          do 591 j=jn1,jn2
+            if (iplus(j,l).gt.satcap) iplus(j,l) = satcap
+591       continue
+        endif
+        ss(l)=sc(l)
+590   continue
       return
       end
 

@@ -275,8 +275,10 @@ c     ***********************************************************
       real uext(ntra),dhlp(ns)
       real vmax,deltap,dp,dpp,factor,tau0,nu0
       real sigbeam,dny,ubg,tbeam,cfreq,dv,fwhm,dmap,doff,dist
-      real spi,pnorm
+      real spi,pnorm,satcap
       real ibeam(ns,-nf:nf),taubeam(ns,-nf:nf)
+      real aij
+      real*8 bij
       integer lin,nff,kerr,ilin,hlev,nbeam,nnp
       integer i,j,il1,il2
 
@@ -295,6 +297,7 @@ c     ************************************************************
 13    format(/,' Number of ray points insufficient to treat the',
      %  ' problem with the',/,' required accuracy !')
 15    format(/,' Error reading the molecule file !')
+16    format(/,' Line shows unphysically high maser amplification !')
 c     ************************************************************
 c     Control output formats
 c     ************************************************************
@@ -384,6 +387,16 @@ c     Reduce the caps and srcs fields to the transition considered
       enddo
 c     Calculate real radiative transfer
       call stpline(r,vs,vt,cap,sc,nn,ubg,p,indr,iout,tautot,nnp,nff,dny)
+c     Check for too high maser amplification: iout must not exceed A/B
+c     Only line center checked
+      satcap = real(dble(aij(ilin)) / bij(ilin))
+      do i=1,nnp
+        if (iout(i,0).gt.satcap) then
+          write(6,16)
+          kerr=1
+          return
+        endif
+      enddo
 c     **********************************************************
 c     Beam integration
 c     **********************************************************
@@ -480,13 +493,13 @@ c     ************************************************************
 11    format(/////////////////////////////)
 12    format(/,' ------------------------------------------------',
      %  '--------------------')
-21    format(//,24X,'SimLine - Version 2.18')
+21    format(//,24X,'SimLine - Version 2.19')
 22    format(/,5X,' Radiative transfer in molecular lines through ',
      %  'turbulent media')
 23    format(/,26X,' Volker Ossenkopf-Okada')
 24    format(20X,' University Observatory Jena /')
 32    format(14X,' Cologne Observatory for Sub-mm Astronomy')
-25    format(//,27X,'March 22, 2026')
+25    format(//,27X,'June 5, 2026')
 27    format(/,' Credits:',/,' --------')
 28    format(' A precursor of this program was written ',
      %  'by E. Kruegel.')
