@@ -461,7 +461,7 @@ c     *************************************************************
       integer i,l,l1,l2
       integer lfrom(ntra),lto(ntra)
 
-        common /lintable/ lfrom, lto
+      common /lintable/ lfrom, lto
       save /lintable/
       data zerolev /1.0d-14/
 

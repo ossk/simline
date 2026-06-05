@@ -544,7 +544,7 @@ c     ***********************************************************
       real negexp,negint,explin,softzone
       real aij
       real*8 bij
-      real satcap
+      real satcap,masercap
       real phi,prof,tau1,tau2,tau,tauq
       real g1,ex1,ex2
       real ihlp1,ihlp2
@@ -553,6 +553,7 @@ c     ***********************************************************
       common /accstep/ explin,softzone
       common /accgauss/ negexp,negint
       save /accstep/,/accgauss/
+      data masercap /1.2e4/
 
 c     *******************************************************
 c     Determine indices of the frequency range
@@ -681,14 +682,13 @@ c     *******************************************************
       j1=jn1
       j2=jn2
 c     *******************************************************
-c     Maser saturation: cap iplus at A/B = (cst2*nu)^3 for
-c     inverted transitions (cp < 0).  This ratio is the maximum
-c     radiation field that does not imply a negative excitation
-c     temperature. It prevents runaway amplification.
+c     Maser saturation: cap iplus at A/B = 1e4*(cst2*nu)^3 for
+c     inverted transitions (cp < 0).  This corresponds to a
+c     RJ temperature of 1e4K.
 c     *******************************************************
       do 590 l=1,lev
         if (cp(l).lt.0.0) then
-          satcap = real(dble(aij(l)) / bij(l))
+          satcap = masercap*(aij(l)/bij(l))
           do 591 j=jn1,jn2
             if (iplus(j,l).gt.satcap) iplus(j,l) = satcap
 591       continue

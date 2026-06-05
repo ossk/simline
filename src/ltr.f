@@ -275,7 +275,7 @@ c     ***********************************************************
       real uext(ntra),dhlp(ns)
       real vmax,deltap,dp,dpp,factor,tau0,nu0
       real sigbeam,dny,ubg,tbeam,cfreq,dv,fwhm,dmap,doff,dist
-      real spi,pnorm,satcap
+      real spi,pnorm,satcap,masercap
       real ibeam(ns,-nf:nf),taubeam(ns,-nf:nf)
       real aij
       real*8 bij
@@ -284,6 +284,9 @@ c     ***********************************************************
 
 c     Normalization factor spi=1/sqrt(pi)
       data spi/ 0.5641896/
+c     Which intensities imply too strong masing 
+c       should be below value in stpdiff
+      data masercap / 1.0e4 /
 c     Translation from I to T: tbeam = h*c^2/(8*pi*k) [K*cm^2]
       data tbeam / 1.716215e9/
 c     Empty message at the beginning
@@ -387,9 +390,9 @@ c     Reduce the caps and srcs fields to the transition considered
       enddo
 c     Calculate real radiative transfer
       call stpline(r,vs,vt,cap,sc,nn,ubg,p,indr,iout,tautot,nnp,nff,dny)
-c     Check for too high maser amplification: iout must not exceed A/B
+c     Check for too high maser amplification: iout fall below masercap
 c     Only line center checked
-      satcap = real(dble(aij(ilin)) / bij(ilin))
+      satcap = masercap*(aij(ilin)/bij(ilin))
       do i=1,nnp
         if (iout(i,0).gt.satcap) then
           write(6,16)
