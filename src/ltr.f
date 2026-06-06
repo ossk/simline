@@ -396,6 +396,7 @@ c     Only line center checked
       do i=1,nnp
         if (iout(i,0).gt.satcap) then
           write(6,16)
+          write(6,*) iout(i,0)/satcap/masercap, 'K'
           kerr=1
           return
         endif
