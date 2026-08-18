@@ -105,6 +105,8 @@ c     ************************************************************
      %  ' parameters !')
 17    format(/,' Kinetic temperatures below the cosmic background',
      %  ' temperature are not allowed !')
+18    format(/,' Unphysical jump of a shell parameters between',
+     %  ' neighbouring shells detected !')
 c     ************************************************************
 c     Control output formats
 c     ************************************************************
@@ -132,6 +134,9 @@ c     ************************************************************
       if (kerr.eq.3) then
         write(6,17)
         goto 1000
+      else if (kerr.eq.4) then
+        write(6,18)
+        return
       else if (kerr.ne.0) then
         return
       endif
@@ -503,7 +508,7 @@ c     ************************************************************
 23    format(/,26X,' Volker Ossenkopf-Okada')
 24    format(20X,' University Observatory Jena /')
 32    format(14X,' Cologne Observatory for Sub-mm Astronomy')
-25    format(//,27X,'June 5, 2026')
+25    format(//,27X,'August 18, 2026')
 27    format(/,' Credits:',/,' --------')
 28    format(' A precursor of this program was written ',
      %  'by E. Kruegel.')

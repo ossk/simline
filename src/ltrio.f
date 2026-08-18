@@ -332,6 +332,13 @@ c       radius relative to parameter (inner parameter vs. outer radius)
             parm(i,j,2)=0.0
             parm(i,j,1)=parm(i-1,j,1)
           else
+c         Guard against near-zero or otherwise corrupted parameter
+c         values between neighbouring shells
+          if (abs(dble(parm(i,j,1))/dble(parm(i-1,j,1))).gt.1.0d10)
+     %          then
+            kerr=4
+            return
+          endif
             parm(i,j,2)=alog(parm(i,j,1)/parm(i-1,j,1))/rat1
             parm(i,j,1)=parm(i-1,j,1)
           endif

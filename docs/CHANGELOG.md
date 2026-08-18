@@ -4,6 +4,7 @@
 
 - Introduced exception handling for strong masing in initial conditions to stabilize iterations
 - Included new error if solution still hits that condition "Line shows unphysically high maser amplification !"
+- Excluded exception check to exclude extreme jumps between neighbouring cells
 
 ## 2.17 → 2.18
 
