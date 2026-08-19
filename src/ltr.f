@@ -508,7 +508,7 @@ c     ************************************************************
 23    format(/,26X,' Volker Ossenkopf-Okada')
 24    format(20X,' University Observatory Jena /')
 32    format(14X,' Cologne Observatory for Sub-mm Astronomy')
-25    format(//,27X,'August 18, 2026')
+25    format(//,27X,'August 19, 2026')
 27    format(/,' Credits:',/,' --------')
 28    format(' A precursor of this program was written ',
      %  'by E. Kruegel.')

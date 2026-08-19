@@ -4,7 +4,9 @@
 
 - Introduced exception handling for strong masing in initial conditions to stabilize iterations
 - Included new error if solution still hits that condition "Line shows unphysically high maser amplification !"
-- Excluded exception check to exclude extreme jumps between neighbouring cells
+- Added exception check to exclude extreme jumps between neighbouring cells
+- Exception check for shell tables containing a near-zero radial step combined with a real parameter jump
+- Slightly widened the zero-width-shell removal threshold for near-duplicate radii before they reach the exponent check
 
 ## 2.17 → 2.18
 

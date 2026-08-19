@@ -29,7 +29,7 @@ c     internal variables
 c     The limit for the smallest layer will not be used very often,
 c     so that it is not treated as a normal numerical parameter
       data small / 0.02/
-      data toosmall /1.0e-6/
+      data toosmall /1.0e-5/
 
       ldelta=hyster*log(epsn)
       rdelta=epsn-1.0

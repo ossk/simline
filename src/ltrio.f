@@ -7,7 +7,7 @@ c     ***************************************************************
       integer ishell,kerr
 
       include 'fsizes.inc'
-      real rs(0:ns),parm(ns,6,2),ed,et,tb,rat1,tl1,tl2
+      real rs(0:ns),parm(ns,6,2),ed,et,tb,rat1,tl1,tl2,maxexp
       integer i,j,l,fixed(0:ns),ipshells
       integer precomm,prestruc,ioerror
       logical oldformat,overwr,fileinp,numdef,anames,allstop
@@ -21,6 +21,9 @@ c     ***************************************************************
       common /options/ precomm,prestruc,overwr,fileinp,numdef,
      %                   anames,allstop
       save /model/,/options/
+
+c     Physically plausible power-law exponents stay well below this;
+      data maxexp /1.0e2/
 
 11    format(//,' *** Input of physical parameters ***',/)
 12    format(' Do you want to use an input file ? [y/n]: ',$)
@@ -340,6 +343,12 @@ c         values between neighbouring shells
             return
           endif
             parm(i,j,2)=alog(parm(i,j,1)/parm(i-1,j,1))/rat1
+c         Guard against a near-zero radial step (rat1) blowing the
+c         power-law exponent up to an unphysical value
+          if (abs(parm(i,j,2)).gt.maxexp) then
+            kerr=4
+            return
+          endif
             parm(i,j,1)=parm(i-1,j,1)
           endif
         enddo
