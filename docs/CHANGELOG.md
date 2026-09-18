@@ -7,6 +7,7 @@
 - Added exception check to exclude extreme jumps between neighbouring cells
 - Exception check for shell tables containing a near-zero radial step combined with a real parameter jump
 - Slightly widened the zero-width-shell removal threshold for near-duplicate radii before they reach the exponent check
+- Added exception handling if input files contain no extension
 
 ## 2.17 → 2.18
 

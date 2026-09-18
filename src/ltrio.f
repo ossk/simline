@@ -1339,8 +1339,11 @@ c     Find last dot
        sbuffer=tbuffer
        goto 200
       endif
+c     No dot at all - keep the full (trimmed) string
+      if (lpos.eq.0) then
+        length=last
 c     Exclude dots in path
-      if (lpos.eq.last) then
+      else if (lpos.eq.last) then
         length=lpos-1
       else if (string(lpos+1:lpos+1).eq.'/') then
         length=last
